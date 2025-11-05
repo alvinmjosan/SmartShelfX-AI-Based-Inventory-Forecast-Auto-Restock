@@ -164,7 +164,7 @@ const TransactionReport = () => {
       </div>
 
       <div style={styles.returnButtonContainer}>
-        <button style={styles.returnButton} onClick={handleReturn}>
+        <button style={styles.returnButton} onClick={() => navigate(-1)}>
           Return
         </button>
       </div>

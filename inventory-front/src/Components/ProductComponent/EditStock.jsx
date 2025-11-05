@@ -82,19 +82,31 @@ const EditStock = ({ mode }) => {
   // *** THIS FUNCTION IS UPDATED ***
   const handleSave = async () => {
     const enteredQuantity = Number(quantity);
-
+  
     if (!enteredQuantity || isNaN(enteredQuantity) || enteredQuantity <= 0) {
       setMessage("Please enter a valid quantity!");
       setMessageType("error");
       return;
     }
-
+    // if (!transactionDate) {
+    //   setMessage("Please select a transaction date!");
+    //   setMessageType("error");
+    //   return;
+    // }
+  
+    // 🧠 New check: Prevent issuing more than available stock
+    if (mode === "issue" && enteredQuantity > product.stock) {
+      setMessage(`Cannot issue ${enteredQuantity} units. Only ${product.stock} units available.`);
+      setMessageType("error");
+      return;
+    }
+  
     const txnDate = transactionDate || new Date().toISOString().split("T")[0];
-
+  
     const user = JSON.parse(localStorage.getItem("loggedInUser") || "{}");
     const rate = mode === "issue" ? product.salesPrice : product.purchasePrice;
     const calculatedTxnValue = enteredQuantity * rate; // Calculate value
-
+  
     const transaction = {
       transactionId,
       transactionType: mode,
@@ -105,12 +117,12 @@ const EditStock = ({ mode }) => {
       transactionDate: txnDate,
       userId: user.username || "unknown",
     };
-
+  
     try {
       await saveTransaction(transaction);
       
       let baseSuccessMessage = "";
-
+  
       if (mode === "issue") {
         await issueProduct(id, enteredQuantity);
         baseSuccessMessage = "Issued successfully!";
@@ -118,25 +130,30 @@ const EditStock = ({ mode }) => {
         await purchaseProduct(id, enteredQuantity);
         baseSuccessMessage = "Purchased successfully!";
       }
-
+  
+      // ✅ New safety check (in case of any backend misalignment)
+      if (mode === "issue" && product.stock - enteredQuantity < 0) {
+        setMessage("Error: Stock cannot go below zero!");
+        setMessageType("error");
+        return;
+      }
+  
       // 1. Set the message for the *next* page
       setNavMessage(baseSuccessMessage); 
-
+  
       // 2. Set the message to display *on this page*
       setMessage(`${baseSuccessMessage} Transaction Value: ₹${calculatedTxnValue}`);
       
       setMessageType("success");
       setShowReorderAlert(false);
-
-      // 3. REMOVED the setTimeout navigation
-      // setTimeout(() => navigate(returnPath), 2000); // <-- THIS IS GONE
-
+  
     } catch (error) {
       console.error("Error updating stock:", error);
       setMessage("Operation failed!");
       setMessageType("error");
     }
   };
+  
 
   if (!product) return <div>Loading product details...</div>;
 

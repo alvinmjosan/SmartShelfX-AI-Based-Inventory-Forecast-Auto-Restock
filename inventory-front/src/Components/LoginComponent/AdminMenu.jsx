@@ -28,7 +28,7 @@ const AdminMenu = () => {
           boxShadow: "0 4px 20px rgba(36,59,85,0.4)",
         }}
       >
-        SmartShelf<span style={{ color: "#ffffff" }}>FX</span>
+        Admin <span style={{ color: "#fff" }}>Dashboard</span>
       </div>
 
       {/* Navigation Bar */}
@@ -130,7 +130,7 @@ const AdminMenu = () => {
               fontSize: "1.05rem",
             }}
           >
-            Manage your <b>SmartShelfFX</b> dashboard effortlessly.
+            Manage your <b>SmartShelfX</b> dashboard effortlessly.
             Monitor stock levels, predict demand, and streamline your supply chain
             all from one intelligent, data-driven interface.
           </p>

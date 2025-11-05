@@ -307,7 +307,7 @@ const SingleProductDemand = () => {
             }}
             onMouseEnter={() => setBtnHovered(true)}
             onMouseLeave={() => setBtnHovered(false)}
-            onClick={returnBack}
+            onClick={() => navigate(-1)}
           >
              Return
           </button>

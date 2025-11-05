@@ -13,7 +13,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const AllProductAnalysis = () => {
     let navigate = useNavigate();
     const [productSale, setProductSale] = useState([]);
-    const [inventoryUser,setInventoryUser] = useState([]);
+    const [inventoryUser, setInventoryUser] = useState([]);
     const setProductSalesData = () => {
         fetch("http://localhost:9898/inventory/analysis")
             .then((res) => res.json())
@@ -47,13 +47,13 @@ const AllProductAnalysis = () => {
         ],
     };
 
-     const returnBack = () => {
-    if (inventoryUser.role === 'Admin') {
-      navigate('/AdminMenu');
-    } else {
-      navigate('/ManagerMenu');
-    }
-  };
+    const returnBack = () => {
+        if (inventoryUser.role === 'Admin') {
+            navigate('/AdminMenu');
+        } else {
+            navigate('/ManagerMenu');
+        }
+    };
 
     return (
         <div
@@ -139,7 +139,7 @@ const AllProductAnalysis = () => {
             {/* Return Button */}
             <div style={{ textAlign: "center", marginTop: "40px" }}>
                 <button
-                    onClick={returnBack}
+                    onClick={() => navigate(-1)}
                     className="btn btn-success"
                     style={{
                         backgroundColor: "#388e3c",

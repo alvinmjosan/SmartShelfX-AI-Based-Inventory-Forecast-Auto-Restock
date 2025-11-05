@@ -259,15 +259,15 @@ const AdminProductReport = () => {
         {/* "Clear Message" button appears only if there is a message */}
        
        <button
-          style={styles.returnButton}
-          onClick={() => {
+style={styles.returnButton}
+onClick={() => {
             // Just navigate. Remove the lines for setMessage
             // and setShowTransactionValue.
-            navigate("/AdminMenu");
-          }}
-        >
-          Return
-        </button>
+ navigate("/AdminMenu");
+}}
+ >
+ Return
+</button>
       </div>
     </div>
   );
