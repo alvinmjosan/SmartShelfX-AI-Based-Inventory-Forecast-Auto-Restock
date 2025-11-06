@@ -80,50 +80,29 @@ const SKUReport = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [skuList, setSkuList] = useState([]);
-  const params = new URLSearchParams(location.search);
-  const from = params.get("from"); // get who opened (admin or manager)
 
   useEffect(() => {
     showAllSKUs().then((response) => setSkuList(response.data));
   }, []);
 
   const returnBack = () => {
+    const params = new URLSearchParams(location.search);
+    const from = params.get("from");
+
     if (from === "manager") navigate("/ManagerMenu");
     else navigate("/AdminMenu");
   };
 
- const deleteSKU = (id) => {
-  // First confirmation
-  const firstConfirm = window.confirm("Are you sure you want to delete this SKU?");
-  if (!firstConfirm) {
-    console.log("Deletion cancelled at first confirmation.");
-    return;
-  }
-
-  // Second confirmation
-  // const secondConfirm = window.confirm("This action cannot be undone. Confirm delete?");
-  // if (!secondConfirm) {
-  //   console.log("Deletion cancelled at second confirmation.");
-  //   return;
-  // }
-
-  // Proceed with deletion
-  removeSKU(id)
-    .then(() => {
+  const deleteSKU = (id) => {
+    removeSKU(id).then(() => {
       const remainSkus = skuList.filter((sku) => sku.skuId !== id);
       setSkuList(remainSkus);
-      // alert("SKU deleted successfully.");
-      console.log(`SKU with ID ${id} deleted.`);
-    })
-    .catch((error) => {
-      console.error("Error deleting SKU:", error);
-      alert("Failed to delete SKU. Please try again.");
     });
-};
-
+  };
 
   return (
     <div style={styles.container}>
+      {/* Hover effect added via style tag */}
       <style>
         {`
           tr:hover {
@@ -145,12 +124,8 @@ const SKUReport = () => {
               <tr>
                 <th style={styles.th}>SKU Id</th>
                 <th style={styles.th}>Description</th>
-                {from !== "manager" && (
-                  <>
-                    <th style={styles.th}>Update SKU</th>
-                    <th style={styles.th}>Delete SKU</th>
-                  </>
-                )}
+                <th style={styles.th}>Update SKU</th>
+                <th style={styles.th}>Delete SKU</th>
               </tr>
             </thead>
             <tbody>
@@ -158,35 +133,27 @@ const SKUReport = () => {
                 <tr key={sku.skuId}>
                   <td style={styles.td}>{sku.skuId}</td>
                   <td style={styles.td}>{sku.skuDescription}</td>
-
-                  {/* Show Update/Delete buttons only for Admin */}
-                  {from !== "manager" && (
-                    <>
-                      <td style={styles.td}>
-                        <Link to={`/update-sku/${sku.skuId}`}>
-                          <button style={styles.buttonUpdate}>Update</button>
-                        </Link>
-                      </td>
-                      <td style={styles.td}>
-                        <button
-                          style={styles.buttonDelete}
-                          onClick={() => deleteSKU(sku.skuId)}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </>
-                  )}
+                  <td style={styles.td}>
+                    <Link to={`/update-sku/${sku.skuId}`}>
+                      <button style={styles.buttonUpdate}>Update</button>
+                    </Link>
+                  </td>
+                  <td style={styles.td}>
+                    <button
+                      style={styles.buttonDelete}
+                      onClick={() => deleteSKU(sku.skuId)}
+                    >
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        <div style={{ textAlign: "center" }}>
-          <button style={styles.buttonReturn} onClick={returnBack}>
-            Return
-          </button>
+        <div style={{ textAlign: 'center' }}>
+          <button style={styles.buttonReturn} onClick={returnBack}>Return</button>
         </div>
       </div>
     </div>

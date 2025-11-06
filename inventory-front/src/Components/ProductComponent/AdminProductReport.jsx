@@ -8,11 +8,12 @@ const styles = {
   // ... (Your existing styles object)
   container: {
     fontFamily: 'Segoe UI, Arial, sans-serif',
-    padding: '20px',
-    maxWidth: '1300px',
+    padding: '30px',          // slightly more padding for breathing room
+    maxWidth: '1600px',       // ✅ increased width (was 1300px)
     margin: 'auto',
     borderRadius: '10px',
   },
+  
   title: {
     textAlign: 'center',
     color: '#007bff',
@@ -37,7 +38,7 @@ tableWrapper: {
 
   tableHeader: {
     padding: '10px 12px',
-    textAlign: 'left',
+    textAlign: 'center',
     backgroundColor: '#343a40',
     color: '#fff',
     fontWeight: 'bold',
@@ -190,6 +191,7 @@ const AdminProductReport = () => {
               <th style={styles.tableHeader}>Name</th>
               <th style={styles.tableHeader}>SKU</th>
               <th style={styles.tableHeader}>Purchase Price</th>
+              <th style={styles.tableHeader}>Sales Price</th>
               <th style={styles.tableHeader}>Stock</th>
               <th style={styles.tableHeader}>Reorder Level</th>
               <th style={styles.tableHeader}>Vendor ID</th>
@@ -204,6 +206,7 @@ const AdminProductReport = () => {
                 <td style={styles.tableCell}>{p.productName}</td>
                 <td style={styles.tableCell}>{p.sku}</td>
                 <td style={styles.tableCell}>{p.purchasePrice}</td>
+                <td style={styles.tableCell}>{p.salesPrice}</td>
                 <td style={styles.tableCell}>{p.stock}</td>
                 <td style={styles.tableCell}>{p.reorderLevel}</td>
                 <td style={styles.tableCell}>{p.vendorId}</td>

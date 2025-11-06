@@ -66,47 +66,140 @@ const SKUUpdate = () => {
   if (fetchError) return <p style={{ color: 'red' }}>{fetchError}</p>;
 
   return (
-    <div>
-      <br />
-      <div className="container">
-        <div className="row">
-          <div className="card col-md-6 offset-md-3">
-            <div className="login-box">
-              <h2 className="text-center"><u>Update SKU</u></h2>
-              <br />
-              <form onSubmit={handleValidation}>
-                <div className="form-group">
-                  <label>SKU ID: </label>
-                  <input
-                    placeholder="SKU ID"
-                    name="skuId"
-                    className="form-control"
-                    value={sku.skuId}
-                    onChange={onChangeHandler} 
-                  />
-                  {errors.skuId && <p style={{ color: "red" }}>{errors.skuId}</p>}
-                </div>
-                <div className="form-group">
-                  <label>SKU Description: </label>
-                  <input
-                    placeholder="SKU Description"
-                    name="skuDescription"
-                    className="form-control"
-                    value={sku.skuDescription}
-                    onChange={onChangeHandler}
-                  />
-                  {errors.skuDescription && <p style={{ color: "red" }}>{errors.skuDescription}</p>}
-                </div>
-                <br />
-                <button type="submit" className='btn btn-primary'>Update</button>
-                &nbsp;
-                <button type="button" className='btn btn-secondary' onClick={cancelUpdate}>Cancel</button>
-              </form>
-            </div>
-          </div>
+    <div
+    style={{
+      minHeight: "100vh",
+      background: "linear-gradient(135deg, #e3f2fd, #ffffff)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      fontFamily: "Segoe UI, Arial, sans-serif",
+    }}
+  >
+    <div
+      style={{
+        backgroundColor: "#fff",
+        borderRadius: "12px",
+        boxShadow: "0 6px 20px rgba(0, 0, 0, 0.1)",
+        padding: "40px 50px",
+        width: "100%",
+        maxWidth: "500px",
+      }}
+    >
+      <h2
+        style={{
+          textAlign: "center",
+          color: "#007bff",
+          marginBottom: "25px",
+          textDecoration: "underline",
+          textUnderlineOffset: "6px",
+        }}
+      >
+        Update SKU
+      </h2>
+  
+      <form onSubmit={handleValidation}>
+        <div style={{ marginBottom: "20px" }}>
+          <label
+            style={{
+              fontWeight: "600",
+              display: "block",
+              marginBottom: "8px",
+              color: "#333",
+            }}
+          >
+            SKU ID:
+          </label>
+          <input
+            placeholder="Enter SKU ID"
+            name="skuId"
+            className="form-control"
+            value={sku.skuId}
+            onChange={onChangeHandler}
+            style={{
+              borderRadius: "8px",
+              padding: "10px",
+              border: "1px solid #ced4da",
+              width: "100%",
+            }}
+          />
+          {errors.skuId && (
+            <p style={{ color: "red", marginTop: "6px", fontSize: "0.9em" }}>
+              {errors.skuId}
+            </p>
+          )}
         </div>
-      </div>
+  
+        <div style={{ marginBottom: "20px" }}>
+          <label
+            style={{
+              fontWeight: "600",
+              display: "block",
+              marginBottom: "8px",
+              color: "#333",
+            }}
+          >
+            SKU Description:
+          </label>
+          <input
+            placeholder="Enter SKU Description"
+            name="skuDescription"
+            className="form-control"
+            value={sku.skuDescription}
+            onChange={onChangeHandler}
+            style={{
+              borderRadius: "8px",
+              padding: "10px",
+              border: "1px solid #ced4da",
+              width: "100%",
+            }}
+          />
+          {errors.skuDescription && (
+            <p style={{ color: "red", marginTop: "6px", fontSize: "0.9em" }}>
+              {errors.skuDescription}
+            </p>
+          )}
+        </div>
+  
+        <div style={{ textAlign: "center", marginTop: "30px" }}>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{
+              backgroundColor: "#007bff",
+              border: "none",
+              padding: "10px 20px",
+              borderRadius: "6px",
+              marginRight: "10px",
+              transition: "0.2s",
+            }}
+            onMouseOver={(e) => (e.target.style.opacity = "0.9")}
+            onMouseOut={(e) => (e.target.style.opacity = "1")}
+          >
+            Update
+          </button>
+  
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={cancelUpdate}
+            style={{
+              backgroundColor: "#6c757d",
+              border: "none",
+              padding: "10px 20px",
+              borderRadius: "6px",
+              transition: "0.2s",
+            }}
+            onMouseOver={(e) => (e.target.style.opacity = "0.9")}
+            onMouseOut={(e) => (e.target.style.opacity = "1")}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
+  </div>
+  
   );
 }
 

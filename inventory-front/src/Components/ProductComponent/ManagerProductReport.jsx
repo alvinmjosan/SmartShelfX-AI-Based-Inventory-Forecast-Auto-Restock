@@ -5,12 +5,10 @@ import { getAllProducts } from "../../Services/ProductService";
 const styles = {
   container: {
     fontFamily: 'Segoe UI, Arial, sans-serif',
-    padding: '20px',
-    maxWidth: '1300px', // wider like admin version
-    margin: '40px auto',
-    backgroundColor: '#f8f9fa',
+    padding: '30px',          // slightly more padding for breathing room
+    maxWidth: '1600px',       // ✅ increased width (was 1300px)
+    margin: 'auto',
     borderRadius: '10px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
   },
   title: {
     textAlign: 'center',
@@ -35,7 +33,7 @@ const styles = {
   },
   tableHeader: {
     padding: '10px 12px',
-    textAlign: 'left',
+    textAlign: 'center',
     backgroundColor: '#343a40',
     color: '#fff',
     fontWeight: 'bold',
@@ -119,6 +117,7 @@ const ManagerProductReport = () => {
               <th style={styles.tableHeader}>Product Name</th>
               <th style={styles.tableHeader}>SKU</th>
               <th style={styles.tableHeader}>Purchase Price</th>
+              <th style={styles.tableHeader}>Sales Price</th>
               <th style={styles.tableHeader}>Stock</th>
               <th style={styles.tableHeader}>Reorder Level</th>
               <th style={styles.tableHeader}>Vendor ID</th>
@@ -138,6 +137,7 @@ const ManagerProductReport = () => {
                   <td style={styles.tableCell}>{prod.productName}</td>
                   <td style={styles.tableCell}>{prod.sku}</td>
                   <td style={styles.tableCell}>{prod.purchasePrice}</td>
+                  <td style={styles.tableCell}>{prod.salesPrice}</td>
                   <td style={styles.tableCell}>{prod.stock}</td>
                   <td style={styles.tableCell}>{prod.reorderLevel}</td>
                   <td style={styles.tableCell}>{prod.vendorId}</td>

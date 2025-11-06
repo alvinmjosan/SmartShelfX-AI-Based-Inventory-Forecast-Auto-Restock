@@ -190,7 +190,7 @@ const EditStock = ({ mode }) => {
 
           {/* This will now show "Purchased successfully! Transaction Value: ₹24000" */}
           {message && <p style={messageType === "success" ? styles.success : styles.error}>{message}</p>}
-          {showReorderAlert && <div style={styles.reorderAlert}>⚠ Product reached Re-Order Level!</div>}
+          {showReorderAlert && <div style={styles.reorderAlert}></div>}
         </div>
 
         <div style={styles.buttonContainer}>

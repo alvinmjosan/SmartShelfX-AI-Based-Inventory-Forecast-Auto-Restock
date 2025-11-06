@@ -36,8 +36,18 @@ const EditProductPrice = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Convert input to number for safety
+    const price = Number(form.productPrice);
+  
+    // Validation check
+    if (isNaN(price) || price <= 0) {
+      alert("Please enter a valid positive price greater than 0.");
+      return;
+    }
+  
     try {
-      await updateProductPrice(id, form.productPrice);
+      await updateProductPrice(id, price);
       alert("Price updated successfully.");
       navigate("/AdProdRepo");
     } catch (err) {
@@ -45,6 +55,7 @@ const EditProductPrice = () => {
       alert("Update failed.");
     }
   };
+  
 
   return (
     <div
